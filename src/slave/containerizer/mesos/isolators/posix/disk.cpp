@@ -492,7 +492,7 @@ private:
     // NOTE: The monitor watchdog will watch the parent process and kill
     // the 'du' process in case that the parent die.
     Try<Subprocess> s = subprocess(
-        "du",
+        "@du@",
         command,
         Subprocess::PATH("/dev/null"),
         Subprocess::PIPE(),

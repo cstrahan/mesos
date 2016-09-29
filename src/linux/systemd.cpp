@@ -196,12 +196,19 @@ bool exists()
   // This is static as the init system should not change while we are running.
   static const bool exists = []() -> bool {
     // (1) Test whether `/sbin/init` links to systemd.
-    const Result<string> realpath = os::realpath("/sbin/init");
-    if (realpath.isError() || realpath.isNone()) {
-      LOG(WARNING) << "Failed to test /sbin/init for systemd environment: "
-                   << realpath.error();
+    // cstrahan: first assume we're on NixOS, then try non-NixOS
+    Result<string> realpath = os::realpath("/run/current-system/systemd/lib/systemd/systemd")
+    Result<string> realpathNixOS = realpath;
+    if (realpathNixOS.isError() || realpathNixOS.isNone()) {
+      Result<string> realpathNonNixOS = realpath = os::realpath("/sbin/init");
+      if (realpathNonNixOS.isError() || realpathNonNixOS.isNone()) {
+        LOG(WARNING) << "Failed to test /run/current-system/systemd/lib/systemd/systemd for systemd environment: "
+                     << realpathNixOS.error();
+        LOG(WARNING) << "Failed to test /sbin/init for systemd environment: "
+                     << realpathNonNixOS.error();
 
-      return false;
+        return false;
+      }
     }
 
     CHECK_SOME(realpath);

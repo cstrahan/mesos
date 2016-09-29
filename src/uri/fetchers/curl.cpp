@@ -98,7 +98,7 @@ Future<Nothing> CurlFetcherPlugin::fetch(
   };
 
   Try<Subprocess> s = subprocess(
-      "curl",
+      "@curl@",
       argv,
       Subprocess::PATH("/dev/null"),
       Subprocess::PIPE(),

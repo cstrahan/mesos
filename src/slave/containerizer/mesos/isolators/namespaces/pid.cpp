@@ -163,7 +163,7 @@ Future<Option<ContainerLaunchInfo>> NamespacesPidIsolatorProcess::prepare(
   // containers cannot see the namespace bind mount of other
   // containers.
   launchInfo.add_pre_exec_commands()->set_value(
-      "mount -n --bind " + string(PID_NS_BIND_MOUNT_MASK_DIR) +
+      "@mount@ -n --bind " + string(PID_NS_BIND_MOUNT_MASK_DIR) +
       " " + string(PID_NS_BIND_MOUNT_ROOT));
 
   // Mount /proc for the container's pid namespace to show the
@@ -176,9 +176,9 @@ Future<Option<ContainerLaunchInfo>> NamespacesPidIsolatorProcess::prepare(
   // -n flag so the mount is not added to the mtab where it will not
   // be correctly removed with the namespace terminates.
   launchInfo.add_pre_exec_commands()->set_value(
-      "mount none /proc --make-private -o rec");
+      "@mount@ none /proc --make-private -o rec");
   launchInfo.add_pre_exec_commands()->set_value(
-      "mount -n -t proc proc /proc -o nosuid,noexec,nodev");
+      "@mount@ -n -t proc proc /proc -o nosuid,noexec,nodev");
 
   return launchInfo;
 }

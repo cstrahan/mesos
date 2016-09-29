@@ -141,7 +141,7 @@ Future<Nothing> CopyBackendProcess::_provision(
 #endif // __APPLE__ || __FreeBSD__
 
   Try<Subprocess> s = subprocess(
-      "cp",
+      "@cp@",
       args,
       Subprocess::PATH("/dev/null"),
       Subprocess::PATH("/dev/null"),

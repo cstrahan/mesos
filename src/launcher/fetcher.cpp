@@ -68,13 +68,13 @@ static Try<bool> extract(
       strings::endsWith(sourcePath, ".tar.bz2") ||
       strings::endsWith(sourcePath, ".txz") ||
       strings::endsWith(sourcePath, ".tar.xz")) {
-    command = "tar -C '" + destinationDirectory + "' -xf";
+    command = "@tar@ -C '" + destinationDirectory + "' -xf";
   } else if (strings::endsWith(sourcePath, ".gz")) {
     string pathWithoutExtension = sourcePath.substr(0, sourcePath.length() - 3);
     string filename = Path(pathWithoutExtension).basename();
-    command = "gzip -dc > '" + destinationDirectory + "/" + filename + "' <";
+    command = "@gzip@ -dc > '" + destinationDirectory + "/" + filename + "' <";
   } else if (strings::endsWith(sourcePath, ".zip")) {
-    command = "unzip -o -d '" + destinationDirectory + "'";
+    command = "@unzip@ -o -d '" + destinationDirectory + "'";
   } else {
     return false;
   }
@@ -162,7 +162,7 @@ static Try<string> copyFile(
     const string& sourcePath,
     const string& destinationPath)
 {
-  const string command = "cp '" + sourcePath + "' '" + destinationPath + "'";
+  const string command = "@cp@ '" + sourcePath + "' '" + destinationPath + "'";
 
   LOG(INFO) << "Copying resource with command:" << command;
 
