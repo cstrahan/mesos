@@ -97,7 +97,7 @@ Future<Nothing> CopyFetcherPlugin::fetch(
   const vector<string> argv = {"cp", "-a", uri.path(), directory};
 
   Try<Subprocess> s = subprocess(
-      "cp",
+      "@cp@",
       argv,
       Subprocess::PATH("/dev/null"),
       Subprocess::PIPE(),

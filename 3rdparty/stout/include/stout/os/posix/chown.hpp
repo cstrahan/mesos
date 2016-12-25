@@ -34,7 +34,7 @@ inline Try<Nothing> chown(
     // TODO(bmahler): Consider walking the file tree instead. We would need
     // to be careful to not miss dotfiles.
     std::string command =
-      "chown -R " + stringify(uid) + ':' + stringify(gid) + " '" + path + "'";
+      "@chown@ -R " + stringify(uid) + ':' + stringify(gid) + " '" + path + "'";
 
     int status = os::system(command);
     if (status != 0) {

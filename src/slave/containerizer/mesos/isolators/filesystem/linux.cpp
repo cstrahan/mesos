@@ -159,9 +159,9 @@ Try<Isolator*> LinuxFilesystemIsolatorProcess::create(const Flags& flags)
       // here because 'create' will only be invoked during
       // initialization.
       Try<string> mount = os::shell(
-          "mount --bind %s %s && "
-          "mount --make-private %s && "
-          "mount --make-shared %s",
+          "@mount@ --bind %s %s && "
+          "@mount@ --make-private %s && "
+          "@mount@ --make-shared %s",
           workDir->c_str(),
           workDir->c_str(),
           workDir->c_str(),
@@ -180,8 +180,8 @@ Try<Isolator*> LinuxFilesystemIsolatorProcess::create(const Flags& flags)
       LOG(INFO) << "Making '" << workDir.get() << "' a shared mount";
 
       Try<string> mount = os::shell(
-          "mount --make-private %s && "
-          "mount --make-shared %s",
+          "@mount@ --make-private %s && "
+          "@mount@ --make-shared %s",
           workDir->c_str(),
           workDir->c_str());
 
@@ -404,7 +404,7 @@ Try<vector<CommandInfo>> LinuxFilesystemIsolatorProcess::getPreExecCommands(
 
     CommandInfo command;
     command.set_shell(false);
-    command.set_value("mount");
+    command.set_value("@mount@");
     command.add_arguments("mount");
     command.add_arguments("-n");
     command.add_arguments("--rbind");
@@ -569,7 +569,7 @@ Try<vector<CommandInfo>> LinuxFilesystemIsolatorProcess::getPreExecCommands(
     // TODO(jieyu): Consider the mode in the volume.
     CommandInfo command;
     command.set_shell(false);
-    command.set_value("mount");
+    command.set_value("@mount@");
     command.add_arguments("mount");
     command.add_arguments("-n");
     command.add_arguments("--rbind");

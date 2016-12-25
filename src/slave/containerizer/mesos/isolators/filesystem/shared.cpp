@@ -207,7 +207,7 @@ Future<Option<ContainerLaunchInfo>> SharedFilesystemIsolatorProcess::prepare(
     }
 
     launchInfo.add_pre_exec_commands()->set_value(
-        "mount -n --bind " + hostPath + " " + volume.container_path());
+        "@mount@ -n --bind " + hostPath + " " + volume.container_path());
   }
 
   return launchInfo;

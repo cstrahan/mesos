@@ -127,7 +127,7 @@ private:
     // NOTE: The supervisor childhook places perf in its own process group
     // and will kill the perf process when the parent dies.
     Try<Subprocess> _perf = subprocess(
-        "perf",
+        "@perf@",
         argv,
         Subprocess::PIPE(),
         Subprocess::PIPE(),
@@ -319,7 +319,7 @@ bool valid(const set<string>& events)
   ostringstream command;
 
   // Log everything to stderr which is then redirected to /dev/null.
-  command << "perf stat --log-fd 2";
+  command << "@perf@ stat --log-fd 2";
   foreach (const string& event, events) {
     command << " --event " << event;
   }

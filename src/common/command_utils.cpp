@@ -140,7 +140,7 @@ Future<Nothing> tar(
 
   argv.emplace_back(input);
 
-  return launch("tar", argv)
+  return launch("@tar@", argv)
     .then([]() { return Nothing(); });
 }
 
@@ -162,7 +162,7 @@ Future<Nothing> untar(
     argv.emplace_back(directory.get());
   }
 
-  return launch("tar", argv)
+  return launch("@tar@", argv)
     .then([]() { return Nothing(); });
 }
 
@@ -170,7 +170,7 @@ Future<Nothing> untar(
 Future<string> sha512(const Path& input)
 {
 #ifdef __linux__
-  const string cmd = "sha512sum";
+  const string cmd = "@sha512sum@";
   vector<string> argv = {
     cmd,
     input             // Input file to compute shasum.
@@ -206,7 +206,7 @@ Future<Nothing> gzip(const Path& input)
     input
   };
 
-  return launch("gzip", argv)
+  return launch("@gzip@", argv)
     .then([]() { return Nothing(); });
 }
 
@@ -219,7 +219,7 @@ Future<Nothing> decompress(const Path& input)
     input
   };
 
-  return launch("gzip", argv)
+  return launch("@gzip@", argv)
     .then([]() { return Nothing(); });
 }
 

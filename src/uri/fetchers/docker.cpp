@@ -114,7 +114,7 @@ static Future<http::Response> curl(
 
   // TODO(jieyu): Kill the process if discard is called.
   Try<Subprocess> s = subprocess(
-      "curl",
+      "@curl@",
       argv,
       Subprocess::PATH("/dev/null"),
       Subprocess::PIPE(),
@@ -213,7 +213,7 @@ static Future<int> download(
 
   // TODO(jieyu): Kill the process if discard is called.
   Try<Subprocess> s = subprocess(
-      "curl",
+      "@curl@",
       argv,
       Subprocess::PATH("/dev/null"),
       Subprocess::PIPE(),

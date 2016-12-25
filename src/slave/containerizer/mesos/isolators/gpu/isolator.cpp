@@ -355,7 +355,7 @@ Future<Option<ContainerLaunchInfo>> NvidiaGpuIsolatorProcess::_prepare(
     }
 
     launchInfo.add_pre_exec_commands()->set_value(
-      "mount --no-mtab --rbind --read-only " +
+      "@mount@ --no-mtab --rbind --read-only " +
       volume.HOST_PATH() + " " + target);
   }
 

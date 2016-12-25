@@ -147,7 +147,7 @@ Future<Nothing> CopyBackendProcess::_provision(
 #endif // __APPLE__ || __FreeBSD__
 
   Try<Subprocess> s = subprocess(
-      "cp",
+      "@cp@",
       args,
       Subprocess::PATH("/dev/null"),
       Subprocess::PATH("/dev/null"),
@@ -180,7 +180,7 @@ Future<bool> CopyBackendProcess::destroy(const string& rootfs)
   vector<string> argv{"rm", "-rf", rootfs};
 
   Try<Subprocess> s = subprocess(
-      "rm",
+      "@rm@",
       argv,
       Subprocess::PATH("/dev/null"),
       Subprocess::FD(STDOUT_FILENO),

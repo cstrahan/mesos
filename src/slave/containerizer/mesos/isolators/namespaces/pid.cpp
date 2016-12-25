@@ -94,7 +94,7 @@ Future<Option<ContainerLaunchInfo>> NamespacesPidIsolatorProcess::prepare(
   //
   // TOOD(jieyu): Consider unmount the existing /proc.
   launchInfo.add_pre_exec_commands()->set_value(
-      "mount -n -t proc proc /proc -o nosuid,noexec,nodev");
+      "@mount@ -n -t proc proc /proc -o nosuid,noexec,nodev");
 
   return launchInfo;
 }

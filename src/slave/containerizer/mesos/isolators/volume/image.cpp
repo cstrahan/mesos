@@ -214,7 +214,7 @@ Future<Option<ContainerLaunchInfo>> VolumeImageIsolatorProcess::_prepare(
 
     CommandInfo* command = launchInfo.add_pre_exec_commands();
     command->set_shell(false);
-    command->set_value("mount");
+    command->set_value("@mount@");
     command->add_arguments("mount");
     command->add_arguments("-n");
     command->add_arguments("--rbind");
